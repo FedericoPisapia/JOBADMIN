@@ -33,7 +33,6 @@ class JobAdmin extends StatefulWidget {
 }
 
 class _JobAdminState extends State<JobAdmin> {
-  bool val = false;
   Map<String, bool> eta = {
     'Opzione 1 : 18-25': false,
     'Opzione 2 : 25-35': false,
@@ -84,16 +83,10 @@ class _JobAdminState extends State<JobAdmin> {
         filtri['sede']!.add(key);
       }
     });
-    if (!filtri.isEmpty) {
       Navigator.push(
         context,
         MaterialPageRoute(builder: (context) => Filtro(filtro: filtri)),
       );
-    } else {
-      setState(() {
-        val = true;
-      });
-    }
   }
 
   @override
@@ -187,7 +180,6 @@ class _JobAdminState extends State<JobAdmin> {
                   style: TextStyle(fontSize: 18),
                 ),
                 onPressed: getCheckboxItems),
-            if (val) Text('inserisci una preferenza'),
             SizedBox(height: 40,)
           ],
         ),
