@@ -16,7 +16,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
+
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
@@ -33,6 +33,7 @@ class JobAdmin extends StatefulWidget {
 }
 
 class _JobAdminState extends State<JobAdmin> {
+  bool val = false;
   Map<String, bool> eta = {
     'Opzione 1 : 18-25': false,
     'Opzione 2 : 25-35': false,
@@ -52,18 +53,20 @@ class _JobAdminState extends State<JobAdmin> {
     'Roma': false,
     'Genova': false,
   };
-  List tmpArray = [];
-
 
   getCheckboxItems() {
-    Map<String, List> filtri = {'eta' : [], 'titolo': [], 'posizione' : [], 'sede' : [] };
+    Map<String, List> filtri = {
+      'eta': [],
+      'titolo': [],
+      'posizione': [],
+      'sede': []
+    };
     eta.forEach((key, value) {
       if (value == true) {
-        if(key=='Opzione 3 : >45'){
+        if (key == 'Opzione 3 : >45') {
           filtri['eta']!.add('45-1000');
-        }
-        else
-        filtri['eta']!.add(key.split(':')[1]);
+        } else
+          filtri['eta']!.add(key.split(':')[1]);
       }
     });
     titolo.forEach((key, value) {
@@ -81,28 +84,23 @@ class _JobAdminState extends State<JobAdmin> {
         filtri['sede']!.add(key);
       }
     });
-
-
-
-
+    if (!filtri.isEmpty) {
       Navigator.push(
         context,
-        MaterialPageRoute(
-            builder: (context) =>
-                Filtro(filtro: filtri)),
+        MaterialPageRoute(builder: (context) => Filtro(filtro: filtri)),
       );
-
-
-
-    print(tmpArray);
-    tmpArray = [];
+    } else {
+      setState(() {
+        val = true;
+      });
+    }
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Amminitrazione'),
+        title: Text('Amministrazione'),
       ),
       body: SingleChildScrollView(
         child: Column(
@@ -185,11 +183,12 @@ class _JobAdminState extends State<JobAdmin> {
             ),
             ElevatedButton(
                 child: Text(
-                  "Visualizza posizioni",
+                  "Visualizza candidati",
                   style: TextStyle(fontSize: 18),
                 ),
                 onPressed: getCheckboxItems),
-
+            if (val) Text('inserisci una preferenza'),
+            SizedBox(height: 40,)
           ],
         ),
       ),

@@ -52,7 +52,9 @@ class _FiltroState extends State<Filtro> {
                     String dataNascita = data['Data'];
                     List data_split = dataNascita.split('/');
                     if (data_split[2].toString().length == 2) {
+                      if(int.parse(data_split[2])<=30)
                       data_split[2] = '20' + data_split[2];
+                      else data_split[2] = '19' + data_split[2];
                     }
                     DateTime date = DateTime(int.parse(data_split[2]),
                         int.parse(data_split[1]), int.parse(data_split[0]));
@@ -86,11 +88,11 @@ class _FiltroState extends State<Filtro> {
                             builder: (context) => Candidato(data : data)),
                       );},
                       title: Text(data['Nome'] + " " + data['Cognome']),
-                      subtitle: Text(data['Cognome']),
+                      subtitle: Text(data['Titolo']+ ', ' + eta.toString() + ' anni'  ),
                       trailing: IconButton(
                         icon: Icon(Icons.assignment_returned_outlined),
                         onPressed: () async {
-                          launch('https://firebasestorage.googleapis.com/v0/b/job-69345.appspot.com/o/CV%2Farcimbolid%203.pdf?alt=media&token=0616049e-d276-4f3d-9ded-36fe22bcefc8');
+                          launch(data['UrlPdf']);
                           },
                       ),
                     );

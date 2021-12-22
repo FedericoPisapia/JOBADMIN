@@ -21,17 +21,18 @@ class _CandidatoState extends State<Candidato> {
         child: Column(
           children: [
             SizedBox(height: 40,),
-            Text(widget.data['Nome']),
-            Text(widget.data['Cognome']),
-            Text(widget.data['Telefono']),
-            Text(widget.data['Email']),
-            Text(widget.data['Data']),
-            Text(widget.data['Posizione']),
-            Text(widget.data['Titolo']),
-            Text(widget.data['Sede']),
+            Text('Nome : ' + widget.data['Nome']),
+            Text('Cognome : ' +widget.data['Cognome']),
+            Text('Telefono : ' +widget.data['Telefono']),
+            Text('Email : ' +widget.data['Email']),
+            Text('Data di nascità : ' +widget.data['Data']),
+            Text('Posizione : ' +widget.data['Posizione']),
+            Text('Titolo : ' +widget.data['Titolo']),
+            Text('Sede : ' +widget.data['Sede']),
+            Text('Candidatura : ' +widget.data['Candidatura']),
             TextButton(
                 onPressed: () {print(widget.data['UrlPdf']);
-                  launch("https://firebasestorage.googleapis.com/v0/b/job-69345.appspot.com/o/CV%2Farcimbolid%203.pdf?alt=media&token=0616049e-d276-4f3d-9ded-36fe22bcefc8");
+                  launch(widget.data['UrlPdf']);
                 },
                 child: Text('scarica il CV'))
           ],
